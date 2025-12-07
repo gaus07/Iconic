@@ -17,7 +17,7 @@ export default function Home() {
         <PropertyListings />
         <ProcessTestimonial />
         <TestimonialsSection />
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted rounded-2xl mt-16">
+        <section className="w-full py-12 md:py-24 lg:py-32 rounded-2xl mt-16">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">

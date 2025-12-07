@@ -15,7 +15,7 @@ export default function ProcessTestimonial() {
       id: 1,
       title: "Find your dream house as easy as 1, 2, 3",
       description: "",
-      image: "/placeholder.svg?height=800&width=1000",
+      image: "/process/search.jpg?height=800&width=1000",
       step: "Our process",
     },
     {
@@ -23,7 +23,7 @@ export default function ProcessTestimonial() {
       title: "Search for your favorite house in your location",
       description:
         "Lorem ipsum dolor sit amet consectetur vitae purus quis metus sed semper diam iaculis duis vitae purus amet sagittis leo elit vitae dolor.",
-      image: "/placeholder.svg?height=800&width=1000",
+      image: "/process/search.jpg?height=800&width=1000",
       mockup: {
         title: "Choose your location",
         properties: [
@@ -48,7 +48,7 @@ export default function ProcessTestimonial() {
       title: "Schedule a viewing with our expert agents",
       description:
         "Lorem ipsum dolor sit amet consectetur vitae purus quis metus sed semper diam iaculis duis vitae purus amet sagittis leo elit vitae dolor.",
-      image: "/placeholder.svg?height=800&width=1000",
+      image: "/process/search.jpg?height=800&width=1000",
       mockup: {
         title: "Choose a date",
         calendar: true,
@@ -60,7 +60,7 @@ export default function ProcessTestimonial() {
       title: "Get the keys to your new home",
       description:
         "Lorem ipsum dolor sit amet consectetur vitae purus quis metus sed semper diam iaculis duis vitae purus amet sagittis leo elit vitae dolor.",
-      image: "/placeholder.svg?height=800&width=1000",
+      image: "/process/search.jpg?height=800&width=1000",
       mockup: {
         title: "Congratulations!",
         success: true,

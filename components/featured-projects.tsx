@@ -12,7 +12,7 @@ export default function FeaturedProjects() {
       title: "Luxury Loft in San Francisco",
       description: "Lorem ipsum dolor sit amet consectetur. Id eu mi ac ac aliquam etiam ultrices augue convallis.",
       location: "2238 Stradella Rd, SF",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/rooms/2BHK-1.jpg?height=600&width=800",
       type: "For rent",
     },
     {
@@ -20,7 +20,7 @@ export default function FeaturedProjects() {
       title: "Riverside Villas",
       description: "Lorem ipsum dolor sit amet consectetur. Id eu mi ac ac aliquam etiam ultrices augue convallis.",
       location: "1845 Riverside Dr, LA",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/rooms/2BHK-2.jpg?height=600&width=800",
       type: "For sale",
     },
     {
@@ -28,7 +28,7 @@ export default function FeaturedProjects() {
       title: "Urban Lofts",
       description: "Lorem ipsum dolor sit amet consectetur. Id eu mi ac ac aliquam etiam ultrices augue convallis.",
       location: "567 Arts District, NY",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/rooms/shop1.jpg?height=600&width=800",
       type: "For rent",
     },
   ]

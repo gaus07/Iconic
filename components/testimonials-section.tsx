@@ -1,7 +1,17 @@
+"use client"
+
+import * as React from "react"
 import Image from "next/image"
 import { Quote } from "lucide-react"
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -32,7 +42,7 @@ export default function TestimonialsSection() {
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+    <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -42,30 +52,41 @@ export default function TestimonialsSection() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="bg-background">
-              <CardContent className="pt-6">
-                <Quote className="h-8 w-8 text-muted-foreground mb-4" />
-                <p className="text-muted-foreground">{testimonial.quote}</p>
-              </CardContent>
-              <CardFooter>
-                <div className="flex items-center space-x-4">
-                  <Image
-                    src={testimonial.avatar || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <p className="text-sm font-medium">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+
+        <div className="mt-8 flex justify-center">
+          <Carousel className="w-full max-w-xl">
+            <CarouselContent>
+              {testimonials.map((testimonial) => (
+                <CarouselItem key={testimonial.id}>
+                  <div className="p-4">
+                    <Card className="bg-background shadow-md rounded-2xl">
+                      <CardContent className="pt-6">
+                        <Quote className="h-8 w-8 text-muted-foreground mb-4" />
+                        <p className="text-muted-foreground mb-4">{testimonial.quote}</p>
+                      </CardContent>
+                      <CardFooter>
+                        <div className="flex items-center space-x-4">
+                          <Image
+                            src={testimonial.avatar || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                          />
+                          <div>
+                            <p className="text-sm font-medium">{testimonial.name}</p>
+                            <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                          </div>
+                        </div>
+                      </CardFooter>
+                    </Card>
                   </div>
-                </div>
-              </CardFooter>
-            </Card>
-          ))}
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </div>
     </section>
