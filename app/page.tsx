@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/section/navbar"
 import { HeroSection } from "@/components/section/home_page/hero"
 import { FeaturedProperties } from "@/components/section/home_page/featuredProperties"
+import ProcessTestimonial from "@/components/section/home_page/process-testimonial"
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         heroImage="/main.jpeg"
       />
         <FeaturedProperties />
+        <ProcessTestimonial />
     </main>
   )
 }

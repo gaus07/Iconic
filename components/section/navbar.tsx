@@ -28,7 +28,7 @@ export function Navbar({
     const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 w-full">
-    <nav className="w-full bg-white px-6 md:px-12 pt-6 lg:pt-6 pb-0 lg:pb-0 relative z-50">
+    <nav className="w-full bg-white px-6 md:px-12 pt-6 lg:pt-6 pb-0 lg:pb-6 relative z-50">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center gap-2">
