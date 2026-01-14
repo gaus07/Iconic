@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar
-                logoText="Property X"
+                logoText="Iconic Builders & Developers"
                 navItems={[
                   { label: "Home", href: "#" },
                   { label: "About", href: "#" },

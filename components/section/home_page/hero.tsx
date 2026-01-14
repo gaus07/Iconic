@@ -1,6 +1,24 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { motion, useReducedMotion, TargetAndTransition, delay } from "framer-motion"
+import { EASING } from "@/lib/animation-config"
+import { useRef } from "react"
+import Link from "next/link"
+
+const statCardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.5, ease: EASING.smooth },
+  },
+}
+
+const testimonialVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.6, ease: EASING.smooth, delay: 0.15 },
+  },
+}
 
 interface HeroSectionProps {
   title: string
@@ -29,7 +47,7 @@ interface Testimonial {
   image: string
 }
 
-export function HeroSection({
+export function HeroSection({  
   title,
   description,
   primaryCtaText = "Start exploring",
@@ -57,18 +75,34 @@ export function HeroSection({
     location: "NY",
     image: "/professional-woman.png",
   },
+
 }: HeroSectionProps) {
+  // const { ref, isInView } = useInViewAnimation()
+  const prefersReducedMotion = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // If user prefers reduced motion, use instant animations
+  const getAnimation = (animation: TargetAndTransition): TargetAndTransition => (prefersReducedMotion ? { opacity: 1 } : animation)
+
   return (
     <>
       {/* Hero Section */}
-      <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+      <section ref={containerRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Border Radius */}
-        <div className="absolute inset-0 rounded-2xl overflow-hidden m-4 md:m-6 lg:m-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeIn" }}
+          className="absolute inset-0 rounded-2xl overflow-hidden m-4 md:m-6 lg:mt-0 lg:m-8">
           <img src={heroImage || "/placeholder.svg"} alt={heroImageAlt} className="w-full h-full object-cover" />
           {/* Overlay for better text contrast */}
           <div className="absolute inset-0 bg-black/30" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+        </motion.div>
+        <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{opacity: 1, y: 0}}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
           <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             {/* Title - Left Side */}
             <div className="flex-1">
@@ -79,15 +113,18 @@ export function HeroSection({
               <p className="text-base md:text-lg text-white/95 leading-relaxed">{description}</p>
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <Button
+                <motion.button
+                  whileHover={{scale: 1.05, y: -2}}
+                  whileTap={{scale: 0.9, y: 1}}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
                   onClick={onPrimaryCtaClick}
-                  variant="secondary"
-                  size="default"
-                  className="rounded-full bg-slate-800 hover:bg-slate-700 text-white"
+                  className="rounded-full text-[16px] px-6 py-2 bg-iconic-btns hover:bg-iconic-btns text-iconic-primary"
                 >
+                  <Link href="#">
                   {primaryCtaText}
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                  </Link>
+                  {/* <ArrowRight className="w-4 h-4" /> */}
+                </motion.button>
                 <a
                   href={secondaryCtaHref}
                   className="text-white font-medium flex items-center gap-2 hover:gap-3 transition-all"
@@ -98,7 +135,7 @@ export function HeroSection({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Stats & Testimonial Section */}
@@ -106,7 +143,12 @@ export function HeroSection({
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Stats Section */}
-            <div className="flex flex-col sm:flex-row gap-8 md:gap-12">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={statCardVariants}
+              className="flex flex-col sm:flex-row gap-8 md:gap-12">
               {stats.map((stat, index) => (
                 <div key={index} className="flex-1">
                   <p className="text-gray-600 text-sm md:text-base font-medium mb-2">{stat.label}</p>
@@ -114,9 +156,14 @@ export function HeroSection({
                   <p className="text-gray-700 text-sm md:text-base leading-relaxed">{stat.description}</p>
                 </div>
               ))}
-            </div>
+            </motion.div>
             {/* Testimonial Section */}
-            <div className="flex flex-col gap-6 lg:pl-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={testimonialVariants}
+              className="flex flex-col gap-6 lg:pl-8">
               <div className="flex gap-4">
                 {/* Profile Image */}
                 <img
@@ -135,7 +182,7 @@ export function HeroSection({
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
