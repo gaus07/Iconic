@@ -1,8 +1,29 @@
 "use client"
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Plus, MapPin, Star, Home, Bed, Bath, Car, Flag } from "lucide-react"
+import { ChevronLeft, ChevronRight, Plus, MapPin, Star, Home, Bed, Bath, Car, Flag, User } from "lucide-react"
 import { motion } from 'framer-motion';
 import { HERO_ANIMATION } from "@/lib/animation-config";
+
+const missionCardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.9, ease: HERO_ANIMATION.easeOut },
+  },
+}
+
+const aboutCardTextVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.5, ease: HERO_ANIMATION.easeOut },
+  },
+}
+
+const aboutCardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.6, ease: HERO_ANIMATION.easeOut, delay: 0.15 },
+  },
+}
 
 const featureCardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -152,11 +173,11 @@ export function FeaturedProperties({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        variants={featureCardVariants}
+        variants={missionCardVariants}
         className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 bg-slate-800/50 rounded-full px-4 py-2 mb-4">
             <Flag className="w-4 h-4 text-white fill-white" />
-            <span className="text-sm text-white font-medium">Featured properties</span>
+            <span className="text-sm text-white font-medium">Our mission</span>
           </div>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{title}</h2>
@@ -165,7 +186,12 @@ export function FeaturedProperties({
         </motion.div>
 
         {/* Grid Layout Container */}
-        <div className="relative flex items-center justify-center gap-4 flex-1">
+        <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={featureCardVariants}
+        className="relative flex items-center justify-center gap-4 flex-1">
           <div className="w-250 overflow-hidden px-12 md:px-16">
             <div className="flex gap-4 h-120">
               {/* Left tall image */}
@@ -199,32 +225,38 @@ export function FeaturedProperties({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Browse All Link */}
-        <div className="flex justify-center">
+        <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={featureCardVariants}
+        className="flex justify-center">
           <p className="text-white font-semibold flex items-center text-center">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, totam possimus repellendus, veritatis beatae odit corporis, illo autem laboriosam cum vero nobis. Nihil consequatur sequi, accusantium ex, in, aspernatur reprehenderit voluptate maiores harum quam voluptatum.
             </p>
-          {/* <button
-            onClick={onBrowseClick}
-            className="text-white font-semibold flex items-center gap-2 hover:gap-3 transition-all hover:opacity-80"
-          >
-            Browse all properties
-            <ChevronRight className="w-4 h-4" />
-          </button> */}
-        </div>
+        </motion.div>
       </div>
     </section>
 
     <section className="relative flex items-center justify-center overflow-hidden bg-white">
         <div className="w-full h-full rounded-3xl m-4 md:m-6 lg:m-8 lg:my-20 p-8 md:p-12 lg:p-16 lg:py-20 flex items-center justify-between">
           {/* Left Content */}
-          <div className="w-full md:w-1/2 flex flex-col justify-center pr-0 md:pr-8 lg:pr-12">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={aboutCardTextVariants}
+          // transition={{ delay: 0.1 }}
+          className="w-full md:w-1/2 flex flex-col justify-center pr-0 md:pr-8 lg:pr-12">
             {/* About Badge */}
-            <div className="inline-flex items-center gap-2 bg-slate-200 rounded-full px-4 py-2 mb-6 w-fit">
-              <div className="w-5 h-5 rounded-full bg-slate-400"></div>
-              <span className="text-sm text-slate-700 font-medium">About us</span>
+            <div className="inline-flex items-center gap-2 bg-iconic-badge rounded-full px-3 py-2 mb-6 w-fit">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-iconic-badge-probg overflow-hidden">
+              <img src="/icons/home_user.svg" alt="User" className="w-3.5 h-3.5 object-contain" />
+              </span>
+              <span className="text-sm text-iconic-secondary font-medium">About us</span>
             </div>
 
             {/* Heading */}
@@ -245,11 +277,16 @@ export function FeaturedProperties({
               Start exploring
               <ChevronRight className="w-5 h-5" />
             </button>
-          </div>
+          </motion.div>
 
           {/* Right Image Section */}
           <div className="hidden md:flex md:w-3/5 items-center justify-center relative">
-            <div className="relative w-full">
+            <motion.div
+            initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={aboutCardVariants}
+            className="relative w-full">
               {/* Main Property Image with Border Radius */}
               <img
                 src="/home_about-us.jpg"
@@ -281,7 +318,7 @@ export function FeaturedProperties({
                 <div className="w-5 h-5 rounded-full bg-slate-300"></div>
                 <span className="text-sm font-semibold text-slate-800">6 parking zones</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -290,7 +327,12 @@ export function FeaturedProperties({
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
         <div className="w-full h-full rounded-3xl m-4 md:m-6 lg:m-8 px-8 md:px-12 lg:px-16 flex flex-col justify-between">
           {/* Header */}
-          <div className="flex flex-col items-center text-center mb-12 md:mb-16">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={featureCardVariants}
+          className="flex flex-col items-center text-center mb-12 md:mb-16">
             <div className="inline-flex items-center gap-2 bg-slate-200 rounded-full px-4 py-2 mb-6">
               <div className="w-5 h-5 rounded-full bg-slate-400"></div>
               <span className="text-sm text-slate-700 font-medium">All properties</span>
@@ -304,10 +346,15 @@ export function FeaturedProperties({
               Lorem ipsum dolor sit amet consectetur. Sit ut gravida aenean potenti. Metus in eu vel morbi dui nunc
               tellus. Non a massa maecenas massa.
             </p>
-          </div>
+          </motion.div>
 
           {/* Properties Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={featureCardVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
             {allProperties.map((property, index) => (
               <div key={property.id} className="flex flex-col">
                 {/* Property Card */}
@@ -376,10 +423,15 @@ export function FeaturedProperties({
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={featureCardVariants}
+          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
             <button className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white rounded-full px-6 py-3 font-semibold hover:bg-slate-800 transition-colors">
               Start exploring
               <ChevronRight className="w-5 h-5" />
@@ -388,7 +440,7 @@ export function FeaturedProperties({
               Browse all properties
               <ChevronRight className="w-4 h-4" />
             </button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

@@ -1,18 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Parkinsans, Jost } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/section/navbar";
 import { Footer } from "@/components/section/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
+
+const jost = Jost({
   subsets: ["latin"],
-});
+  // weight: ["800"],
+  // variable: "--font-parkinsans",
+  // display: "swap",
+  // adjustFontFallback: false,
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jost.className}`}
       >
         <Navbar
                 logoText="Iconic Builders & Developers"

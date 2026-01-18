@@ -1,14 +1,47 @@
 "use client"
 
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, Briefcase, MessageCircle } from "lucide-react"
+import { motion, scale } from 'framer-motion';
+import { HERO_ANIMATION } from "@/lib/animation-config";
+
+const footerVariants = {
+  hidden: { opacity: 0, scale: 1 },
+  visible: { opacity: 1, scale: 1,
+  transition: { duration: 0.3, ease: HERO_ANIMATION.easeIn },
+  },
+}
+
+const leftVariants = {
+  hidden: { opacity: 0, scale: 1 },
+  visible: { opacity: 1, scale: 1,
+  transition: { duration: 0.5, ease: HERO_ANIMATION.easeIn, delay: 0.15 },
+  },
+}
+
+const rightVariants = {
+  hidden: { opacity: 0, scale: 1 },
+  visible: { opacity: 1, scale: 1,
+  transition: { duration: 0.7, ease: HERO_ANIMATION.easeIn, delay: 0.25 },
+  },
+}
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white m-4 md:m-6 lg:m-8 rounded-3xl overflow-hidden">
+    <motion.footer 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={footerVariants}
+    className="bg-black text-white m-4 md:m-6 lg:m-8 rounded-3xl overflow-hidden">
       <div className="p-8 md:p-10 lg:p-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mb-8">
           {/* Left Section - Subscription */}
-          <div className="col-span-1">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={leftVariants}
+            className="col-span-1">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
               Discover exclusive real estate opportunities
             </h2>
@@ -44,10 +77,15 @@ export function Footer() {
                 <Linkedin size={20} />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Center Section - Utility Pages */}
-          <div className="col-span-1">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={rightVariants}
+            className="col-span-1">
             <h3 className="font-semibold text-lg mb-4">Utility pages</h3>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
@@ -81,10 +119,15 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Right Section - Contact Us (2x2 Grid) */}
-          <div className="col-span-1">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={rightVariants}
+            className="col-span-1">
             <h3 className="font-semibold text-lg mb-4">Contact us</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Email */}
@@ -123,7 +166,7 @@ export function Footer() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Divider */}
@@ -141,6 +184,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

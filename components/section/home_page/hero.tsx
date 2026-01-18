@@ -1,7 +1,6 @@
 "use client"
-import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { motion, useReducedMotion, TargetAndTransition, delay } from "framer-motion"
+import { motion, useReducedMotion, TargetAndTransition } from "framer-motion"
 import { EASING } from "@/lib/animation-config"
 import { useRef } from "react"
 import Link from "next/link"
@@ -81,14 +80,11 @@ export function HeroSection({
   const prefersReducedMotion = useReducedMotion()
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // If user prefers reduced motion, use instant animations
-  const getAnimation = (animation: TargetAndTransition): TargetAndTransition => (prefersReducedMotion ? { opacity: 1 } : animation)
-
   return (
     <>
       {/* Hero Section */}
       <section ref={containerRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Border Radius */}
+        {/* Background Image */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -96,7 +92,7 @@ export function HeroSection({
           className="absolute inset-0 rounded-2xl overflow-hidden m-4 md:m-6 lg:mt-0 lg:m-8">
           <img src={heroImage || "/placeholder.svg"} alt={heroImageAlt} className="w-full h-full object-cover" />
           {/* Overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/40" />
         </motion.div>
         <motion.div
         initial={{ opacity: 0, y: 40 }}

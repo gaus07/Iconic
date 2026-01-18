@@ -1,12 +1,25 @@
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { ArrowRight, CircleDot } from "lucide-react"
+import { useScroll, useMotionValueEvent, motion } from "framer-motion"
+import { HERO_ANIMATION } from "@/lib/animation-config"
+
+const scrrollHeaderVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.5, ease: HERO_ANIMATION.easeOut },
+  },
+}
+
+const scrrollImgVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 ,
+  transition: { duration: 0.6, ease: HERO_ANIMATION.easeOut, delay: 0.15 },
+  },
+}
 
 export default function ProcessTestimonial() {
   const [activeIndex, setActiveIndex] = useState(0)
   const sectionRef = useRef<HTMLDivElement>(null)
-  const testimonialsRef = useRef<(HTMLDivElement | null)[]>([])
 
   const testimonials = [
     {
@@ -42,46 +55,55 @@ export default function ProcessTestimonial() {
     },
   ]
 
-  useEffect(() => {
-    if (!sectionRef.current) return
+  // ===== CHANGED: Replaced IntersectionObserver with Framer Motion scroll tracking =====
+  // This provides smoother, more reliable scroll-based active section detection
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  })
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = testimonialsRef.current.findIndex((ref) => ref === entry.target)
-            if (index !== -1) setActiveIndex(index)
-          }
-        })
+  const cardLength = testimonials.length
+
+  // Track scroll progress and calculate which card should be active
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const cardsBreakpoints = testimonials.map((_, index) => index / cardLength)
+    const closestBreakpointIndex = cardsBreakpoints.reduce(
+      (acc, breakpoint, index) => {
+        const distance = Math.abs(latest - breakpoint)
+        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+          return index
+        }
+        return acc
       },
-      { threshold: 0.5 }
+      0
     )
-
-    testimonialsRef.current.forEach((ref) => ref && observer.observe(ref))
-
-    return () => {
-      testimonialsRef.current.forEach((ref) => ref && observer.unobserve(ref))
-    }
-  }, [])
+    setActiveIndex(closestBreakpointIndex)
+  })
+  // ===== END OF CHANGES =====
 
   return (
     <section ref={sectionRef} className="w-full bg-white py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 lg:px-0">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left column */}
-          <div className="space-y-32">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scrrollHeaderVariants}
+          className="space-y-32">
             {testimonials.map((item, index) => (
               <div
                 key={item.id}
-                ref={(el) => {
-                  testimonialsRef.current[index] = el
-                }}
                 className="min-h-[50vh] flex flex-col justify-center"
               >
-                <div
-                  className={`transition-opacity duration-500 ${
-                    activeIndex === index ? "opacity-100" : "opacity-30"
-                  }`}
+                {/* ===== CHANGED: Wrapped in motion.div for smoother opacity transitions ===== */}
+                <motion.div
+                  initial={{ opacity: 0.3 }}
+                  animate={{
+                    opacity: activeIndex === index ? 1 : 0.3,
+                  }}
+                  transition={{ duration: 0.5 }}
                 >
                   <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-1.5 text-sm mb-4">
                     <CircleDot className="h-4 w-4" />
@@ -100,46 +122,62 @@ export default function ProcessTestimonial() {
 
                   {index === 0 && (
                     <div className="mt-8">
-                      <Link
+                      <a
                         href="/projects"
                         className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
                       >
                         Start exploring
                         <ArrowRight className="h-4 w-4" />
-                      </Link>
+                      </a>
                     </div>
                   )}
-                </div>
+                </motion.div>
+                {/* ===== END OF CHANGES ===== */}
               </div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Right column – sticky image */}
-          <div className="relative hidden lg:block">
+          <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={scrrollImgVariants}
+          className="relative hidden lg:block">
             <div className="sticky top-32">
-              <div className="relative rounded-3xl overflow-hidden">
-                <Image
+              {/* ===== CHANGED: Added motion.div for smoother image transitions ===== */}
+              <motion.div
+                className="relative rounded-3xl overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <img
                   src={testimonials[activeIndex].image}
                   alt={testimonials[activeIndex].title}
-                  width={1000}
-                  height={800}
-                  className="w-full h-auto object-cover rounded-3xl transition-opacity duration-500"
+                  className="w-full h-auto object-cover rounded-3xl"
                 />
-              </div>
+              </motion.div>
+              {/* ===== END OF CHANGES ===== */}
             </div>
-          </div>
+          </motion.div>
 
           {/* Mobile image */}
           <div className="lg:hidden">
-            <div className="relative rounded-3xl overflow-hidden">
-              <Image
+            {/* ===== CHANGED: Added motion.div for smoother image transitions on mobile ===== */}
+            <motion.div
+              className="relative rounded-3xl overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
                 src={testimonials[activeIndex].image}
                 alt={testimonials[activeIndex].title}
-                width={1000}
-                height={800}
-                className="w-full h-auto object-cover rounded-3xl transition-opacity duration-500"
+                className="w-full h-auto object-cover rounded-3xl"
               />
-            </div>
+            </motion.div>
+            {/* ===== END OF CHANGES ===== */}
           </div>
         </div>
       </div>
