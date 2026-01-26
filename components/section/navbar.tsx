@@ -18,9 +18,9 @@ interface NavbarProps {
 export function Navbar({
   logoText = "Iconic Builders & Developers",
   navItems = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Pages", href: "#" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Properties", href: "/properties" },
     { label: "Cart (0)", href: "#" },
   ],
   onCtaClick,

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { ArrowRight, CircleDot } from "lucide-react"
 import { useScroll, useMotionValueEvent, motion } from "framer-motion"
 import { HERO_ANIMATION } from "@/lib/animation-config"
+import Link from "next/link"
 
 const scrrollHeaderVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -82,7 +83,7 @@ export default function ProcessTestimonial() {
   // ===== END OF CHANGES =====
 
   return (
-    <section ref={sectionRef} className="w-full bg-white py-16 md:py-24">
+    <section ref={sectionRef} className="w-full bg-iconic-bg py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 lg:px-0">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left column */}
@@ -97,7 +98,7 @@ export default function ProcessTestimonial() {
                 key={item.id}
                 className="min-h-[50vh] flex flex-col justify-center"
               >
-                {/* ===== CHANGED: Wrapped in motion.div for smoother opacity transitions ===== */}
+                {/* CHANGED: Wrapped in motion.div for smoother opacity transitions */}
                 <motion.div
                   initial={{ opacity: 0.3 }}
                   animate={{
@@ -105,31 +106,53 @@ export default function ProcessTestimonial() {
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-1.5 text-sm mb-4">
+                  {/* <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-1.5 text-sm mb-4">
                     <CircleDot className="h-4 w-4" />
                     <span>{item.step}</span>
-                  </div>
+                  </div> */}
+                  <div className="inline-flex items-center gap-2 bg-iconic-badge rounded-full px-3 py-2 mb-6 w-fit">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-iconic-badge-probg overflow-hidden">
+                <img
+                  src="/icons/process.svg"
+                  alt="User"
+                  className="w-3.5 h-3.5 object-contain"
+                />
+              </span>
+              <span className="text-sm text-iconic-secondary font-medium">
+                {item.step}
+              </span>
+            </div>
 
-                  <h2 className="text-3xl sm:text-5xl font-bold mb-6 leading-tight">
+                  <h2 className="text-3xl sm:text-5xl font-medium mb-6">
                     {item.title}
                   </h2>
 
                   {item.description && (
-                    <p className="text-gray-500 md:text-lg max-w-xl">
+                    <p className="text-iconic-para md:text-lg max-w-xl">
                       {item.description}
                     </p>
                   )}
 
                   {index === 0 && (
-                    <div className="mt-8">
-                      <a
-                        href="/projects"
-                        className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
-                      >
-                        Start exploring
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </div>
+                    // <div className="mt-8">
+                    //   <a
+                    //     href="/projects"
+                    //     className="inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+                    //   >
+                    //     Start exploring
+                    //     <ArrowRight className="h-4 w-4" />
+                    //   </a>
+                    // </div>
+                    <motion.button
+                  whileHover={{scale: 1.05, y: -2}}
+                  whileTap={{scale: 0.9, y: 1}}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="rounded-full text-[16px] px-6 py-2 bg-iconic-btns hover:bg-iconic-btns text-iconic-primary"
+                >
+                  <Link href="#">
+                  Start Exploring
+                  </Link>
+                </motion.button>
                   )}
                 </motion.div>
                 {/* ===== END OF CHANGES ===== */}

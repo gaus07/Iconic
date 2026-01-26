@@ -83,7 +83,7 @@ export function HeroSection({
   return (
     <>
       {/* Hero Section */}
-      <section ref={containerRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+      <section ref={containerRef} className="relative bg-iconic-bg w-full h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -119,7 +119,6 @@ export function HeroSection({
                   <Link href="#">
                   {primaryCtaText}
                   </Link>
-                  {/* <ArrowRight className="w-4 h-4" /> */}
                 </motion.button>
                 <a
                   href={secondaryCtaHref}
@@ -135,7 +134,7 @@ export function HeroSection({
       </section>
 
       {/* Stats & Testimonial Section */}
-      <section className="w-full bg-white py-12 md:py-20 lg:py-20 px-4 md:px-6 lg:px-8">
+      <section className="w-full bg-iconic-bg py-12 md:py-20 lg:py-20 px-4 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Stats Section */}
@@ -147,9 +146,9 @@ export function HeroSection({
               className="flex flex-col sm:flex-row gap-8 md:gap-12">
               {stats.map((stat, index) => (
                 <div key={index} className="flex-1">
-                  <p className="text-gray-600 text-sm md:text-base font-medium mb-2">{stat.label}</p>
-                  <h3 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-4">{stat.value}</h3>
-                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">{stat.description}</p>
+                  <p className="text-iconic-secondary md:text-base text-sm font-medium mb-2">{stat.label}</p>
+                  <h3 className="text-5xl md:text-6xl lg:text-7xl font-medium text-iconic-secondary mb-4">{stat.value}</h3>
+                  <p className="text-iconic-para text-sm md:text-base leading-relaxed">{stat.description}</p>
                 </div>
               ))}
             </motion.div>
@@ -169,12 +168,12 @@ export function HeroSection({
                 />
                 {/* Quote and Author */}
                 <div className="flex-1">
-                  <blockquote className="text-lg md:text-xl font-semibold text-black mb-3 leading-snug">
+                  <blockquote className="text-lg md:text-xl font-semibold text-iconic-secondary mb-3 leading-snug">
                     "{testimonial.quote}"
                   </blockquote>
-                  <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-3">{testimonial.description}</p>
-                  <div className="font-semibold text-black">
-                    {testimonial.author}, <span className="text-gray-600 font-medium">{testimonial.location}</span>
+                  <p className="text-iconic-para text-sm md:text-base leading-relaxed mb-3">{testimonial.description}</p>
+                  <div className="font-semibold text-iconic-secondary">
+                    {testimonial.author}, <span className="text-iconic-secondary font-medium">{testimonial.location}</span>
                   </div>
                 </div>
               </div>

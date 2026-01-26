@@ -32,7 +32,7 @@ export function Footer() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={footerVariants}
-    className="bg-black text-white m-4 md:m-6 lg:m-8 rounded-3xl overflow-hidden">
+    className="bg-iconic-secondary text-white m-4 md:m-6 lg:m-8 rounded-3xl overflow-hidden">
       <div className="p-8 md:p-10 lg:p-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-20 mb-8">
           {/* Left Section - Subscription */}
@@ -42,10 +42,10 @@ export function Footer() {
             viewport={{ once: true, amount: 0.2 }}
             variants={leftVariants}
             className="col-span-1">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4">
               Discover exclusive real estate opportunities
             </h2>
-            <p className="text-gray-400 text-sm mb-6">
+            <p className="text-iconic-badge-probg mb-6">
               Lorem ipsum dolor sit amet consectetur. Egestas eu amet dictum tellus. Purus morbi lorem viverra cros.
             </p>
 
@@ -54,9 +54,9 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="w-full bg-gray-800 text-white px-4 py-3 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-gray-600"
+                className="w-full bg-iconic-btns text-iconic-badge-probg px-4 py-3 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-gray-600"
               />
-              <button className="w-full bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition flex items-center justify-center gap-2">
+              <button className="w-full bg-iconic-primary text-black px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition flex items-center justify-center gap-2">
                 Subscribe
                 <span>→</span>
               </button>
@@ -86,7 +86,7 @@ export function Footer() {
             viewport={{ once: true, amount: 0.2 }}
             variants={rightVariants}
             className="col-span-1">
-            <h3 className="font-semibold text-lg mb-4">Utility pages</h3>
+            <h3 className="font-medium text-lg mb-4">Utility pages</h3>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
                 <a href="#" className="hover:text-white transition">
@@ -128,7 +128,7 @@ export function Footer() {
             viewport={{ once: true, amount: 0.2 }}
             variants={rightVariants}
             className="col-span-1">
-            <h3 className="font-semibold text-lg mb-4">Contact us</h3>
+            <h3 className="font-medium text-lg mb-4">Contact us</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Email */}
               <div className="flex gap-3">
@@ -174,8 +174,8 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <div className="text-white font-bold text-lg">🏠</div>
-                <span className="font-bold text-white">Property X</span>
+                <div className="text-white font-medium text-lg">🏠</div>
+                <span className="font-medium text-white">Property X</span>
               </div>
               <p className="text-gray-500 text-xs md:text-sm">
                 Copyright © Property X | Designed by BRIX Templates – Powered by Webflow

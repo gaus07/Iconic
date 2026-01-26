@@ -49,6 +49,7 @@
   --iconic-btns: #202127;
   --iconic-badge: #EEEFF1;
   --iconic-badge-probg: #A4A6B0;
+  --iconic-bg: #FAFAFB;
 }
 
 .dark {
@@ -138,6 +139,7 @@
   --color-iconic-btns: var(--iconic-btns);
   --color-iconic-badge: var(--iconic-badge);
   --color-iconic-badge-probg: var(--iconic-badge-probg);
+  --color-iconic-bg: var(--iconic-bg);
 }
 
 @layer base {

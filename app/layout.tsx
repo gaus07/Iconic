@@ -35,14 +35,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${jost.className}`}
+        className={`${jost.className} bg-iconic-bg`}
       >
         <Navbar
                 logoText="Iconic Builders & Developers"
                 navItems={[
-                  { label: "Home", href: "#" },
-                  { label: "About", href: "#" },
-                  { label: "Pages", href: "#" },
+                  { label: "Home", href: "/" },
+                  { label: "About", href: "/about" },
+                  { label: "Properties", href: "/properties" },
                   { label: "Cart (0)", href: "#" },
                 ]}
                 ctaText="Start exploring"

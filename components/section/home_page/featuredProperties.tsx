@@ -1,58 +1,80 @@
-"use client"
-import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Plus, MapPin, Star, Home, Bed, Bath, Car, Flag, User } from "lucide-react"
-import { motion } from 'framer-motion';
+"use client";
+import { useState, useEffect } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  MapPin,
+  Star,
+  Home,
+  Bed,
+  Bath,
+  Car,
+  Flag,
+  User,
+  ArrowRight,
+} from "lucide-react";
+import { motion } from "framer-motion";
 import { HERO_ANIMATION } from "@/lib/animation-config";
+import Link from "next/link";
 
 const missionCardVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 ,
-  transition: { duration: 0.9, ease: HERO_ANIMATION.easeOut },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: HERO_ANIMATION.easeOut },
   },
-}
+};
 
 const aboutCardTextVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 ,
-  transition: { duration: 0.5, ease: HERO_ANIMATION.easeOut },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: HERO_ANIMATION.easeOut },
   },
-}
+};
 
 const aboutCardVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 ,
-  transition: { duration: 0.6, ease: HERO_ANIMATION.easeOut, delay: 0.15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: HERO_ANIMATION.easeOut, delay: 0.15 },
   },
-}
+};
 
 const featureCardVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 ,
-  transition: { duration: 0.9, ease: HERO_ANIMATION.easeOut },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: HERO_ANIMATION.easeOut },
   },
-}
+};
 
 interface PropertyCard {
-  id: string
-  title: string
-  description: string
-  location: string
-  image: string
-  type: "For rent" | "For sale"
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  image: string;
+  type: "For rent" | "For sale";
 }
 
 interface FeaturedPropertiesProps {
-  title?: string
-  title2?: string
-  description?: string
-  properties?: PropertyCard[]
-  onBrowseClick?: () => void
+  title?: string;
+  title2?: string;
+  description?: string;
+  properties?: PropertyCard[];
+  onBrowseClick?: () => void;
 }
 
 interface AllPropertiesProps {
-  properties?: PropertyCard[]
-  onStartExploring?: () => void
-  onBrowseAllClick?: () => void
+  properties?: PropertyCard[];
+  onStartExploring?: () => void;
+  onBrowseAllClick?: () => void;
 }
 
 export function FeaturedProperties({
@@ -63,7 +85,8 @@ export function FeaturedProperties({
     {
       id: "1",
       title: "Luxury Loft in San Francisco",
-      description: "Lorem ipsum dolor sit amet consectetur. Id eu mi ac ac aliquam etiam ultrices augue convallis.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Id eu mi ac ac aliquam etiam ultrices augue convallis.",
       location: "2238 Stradella Rd, SF",
       image: "/home_featured-1.jpg",
       type: "For rent",
@@ -71,7 +94,8 @@ export function FeaturedProperties({
     {
       id: "2",
       title: "Modern Villa in Malibu",
-      description: "A stunning coastal property with panoramic ocean views and contemporary design.",
+      description:
+        "A stunning coastal property with panoramic ocean views and contemporary design.",
       location: "3456 Pacific Coast Hwy, Malibu",
       image: "/home_featured-2.jpg",
       type: "For sale",
@@ -79,7 +103,8 @@ export function FeaturedProperties({
     {
       id: "3",
       title: "Downtown Penthouse New York",
-      description: "Luxury penthouse in the heart of Manhattan with floor-to-ceiling windows.",
+      description:
+        "Luxury penthouse in the heart of Manhattan with floor-to-ceiling windows.",
       location: "1 Central Park South, NYC",
       image: "/home_featured-3.jpg",
       type: "For rent",
@@ -87,49 +112,53 @@ export function FeaturedProperties({
   ],
   onBrowseClick,
 }: FeaturedPropertiesProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [itemsPerView, setItemsPerView] = useState(1)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
-      setItemsPerView(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1)
-    }
-    
+      setItemsPerView(
+        window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1,
+      );
+    };
+
     // Set initial value
-    handleResize()
-    
+    handleResize();
+
     // Add event listener
-    window.addEventListener('resize', handleResize)
-    
+    window.addEventListener("resize", handleResize);
+
     // Cleanup
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextProperty = () => {
-    setCurrentIndex((prev) => (prev + 1) % properties.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % properties.length);
+  };
 
   const prevProperty = () => {
-    setCurrentIndex((prev) => (prev - 1 + properties.length) % properties.length)
-  }
+    setCurrentIndex(
+      (prev) => (prev - 1 + properties.length) % properties.length,
+    );
+  };
 
   const getVisibleProperties = () => {
-    const visible = []
+    const visible = [];
 
     for (let i = 0; i < itemsPerView; i++) {
-      visible.push(properties[(currentIndex + i) % properties.length])
+      visible.push(properties[(currentIndex + i) % properties.length]);
     }
-    return visible
-  }
+    return visible;
+  };
 
-    const allProperties = [
+  const allProperties = [
     {
       id: "1",
       title: "Luxury Loft in San Francisco",
       description: "",
       location: "2238 Stradella Rd, SF",
       image: "/home_featured-1.jpg",
-      type: "For rent" as const,
+      type: "For sale" as const,
     },
     {
       id: "2",
@@ -145,7 +174,7 @@ export function FeaturedProperties({
       description: "",
       location: "3335 21st, SF",
       image: "/home_featured-3.jpg",
-      type: "For rent" as const,
+      type: "For sale" as const,
     },
     {
       id: "4",
@@ -153,140 +182,169 @@ export function FeaturedProperties({
       description: "",
       location: "90071, South Grand Avenue, San Diego",
       image: "/home_featured-4.jpg",
-      type: "For rent" as const,
+      type: "For sale" as const,
     },
-  ]
+  ];
 
   const propertyDetails = [
     { sqft: "2,553", bedrooms: 3, bathrooms: 2, parking: 3 },
     { sqft: "4,821", bedrooms: 5, bathrooms: 6, parking: 5 },
     { sqft: "1,334", bedrooms: 1, bathrooms: 2, parking: 1 },
     { sqft: "8,392", bedrooms: 4, bathrooms: 6, parking: 4 },
-  ]
+  ];
 
   return (
     <>
-    <section className="relative h-250 flex items-center justify-center overflow-hidden">
-      <div className="w-full h-full bg-slate-950 rounded-3xl m-4 md:m-6 lg:m-8 p-8 md:p-12 lg:p-16 flex flex-col justify-between overflow-y-auto">
-        {/* Header */}
-        <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={missionCardVariants}
-        className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 bg-slate-800/50 rounded-full px-4 py-2 mb-4">
-            <Flag className="w-4 h-4 text-white fill-white" />
-            <span className="text-sm text-white font-medium">Our mission</span>
-          </div>
+      <section className="relative h-250 flex items-center justify-center overflow-hidden">
+        <div className="w-full h-full bg-iconic-secondary rounded-3xl m-4 md:m-6 lg:m-8 p-8 md:p-12 lg:p-16 flex flex-col justify-between overflow-y-auto">
+          {/* Header */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={missionCardVariants}
+            className="flex flex-col items-center text-center"
+          >
+            <div className="inline-flex items-center gap-2 bg-iconic-btns rounded-full px-4 py-2 mb-4">
+              <Flag className="w-4 h-4 text-white fill-white" />
+              <span className="text-sm text-iconic-primary font-medium">
+                Our mission
+              </span>
+            </div>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{title}</h2>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{title2}</h2>
-          {/* <p className="text-slate-300 text-base md:text-lg max-w-2xl">{description}</p> */}
-        </motion.div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary mb-4">
+              {title}
+            </h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary mb-4">
+              {title2}
+            </h2>
+            {/* <p className="text-slate-300 text-base md:text-lg max-w-2xl">{description}</p> */}
+          </motion.div>
 
-        {/* Grid Layout Container */}
-        <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={featureCardVariants}
-        className="relative flex items-center justify-center gap-4 flex-1">
-          <div className="w-250 overflow-hidden px-12 md:px-16">
-            <div className="flex gap-4 h-120">
-              {/* Left tall image */}
-              <div className="flex-1 relative group cursor-pointer rounded-3xl overflow-hidden">
-                <img
-                  src={getVisibleProperties()[0]?.image || "/placeholder.svg"}
-                  alt={getVisibleProperties()[0]?.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to from-black/60 via-transparent to-transparent" />
-              </div>
-
-              {/* Right stacked images */}
-              <div className="flex-1 flex flex-col gap-4">
+          {/* Grid Layout Container */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={featureCardVariants}
+            className="relative flex items-center justify-center gap-4 flex-1"
+          >
+            <div className="w-250 overflow-hidden px-12 md:px-16">
+              <div className="flex gap-4 h-120">
+                {/* Left tall image */}
                 <div className="flex-1 relative group cursor-pointer rounded-3xl overflow-hidden">
                   <img
-                    src={getVisibleProperties()[1]?.image || "/placeholder.svg"}
-                    alt={getVisibleProperties()[1]?.title}
+                    src={getVisibleProperties()[0]?.image || "/placeholder.svg"}
+                    alt={getVisibleProperties()[0]?.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to from-black/60 via-transparent to-transparent" />
                 </div>
-                <div className="flex-1 relative group cursor-pointer rounded-3xl overflow-hidden">
-                  <img
-                    src={getVisibleProperties()[2]?.image || "/placeholder.svg"}
-                    alt={getVisibleProperties()[2]?.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to from-black/60 via-transparent to-transparent" />
+
+                {/* Right stacked images */}
+                <div className="flex-1 flex flex-col gap-4">
+                  <div className="flex-1 relative group cursor-pointer rounded-3xl overflow-hidden">
+                    <img
+                      src={
+                        getVisibleProperties()[1]?.image || "/placeholder.svg"
+                      }
+                      alt={getVisibleProperties()[1]?.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to from-black/60 via-transparent to-transparent" />
+                  </div>
+                  <div className="flex-1 relative group cursor-pointer rounded-3xl overflow-hidden">
+                    <img
+                      src={
+                        getVisibleProperties()[2]?.image || "/placeholder.svg"
+                      }
+                      alt={getVisibleProperties()[2]?.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to from-black/60 via-transparent to-transparent" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Browse All Link */}
-        <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={featureCardVariants}
-        className="flex justify-center">
-          <p className="text-white font-semibold flex items-center text-center">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, totam possimus repellendus, veritatis beatae odit corporis, illo autem laboriosam cum vero nobis. Nihil consequatur sequi, accusantium ex, in, aspernatur reprehenderit voluptate maiores harum quam voluptatum.
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={featureCardVariants}
+            className="flex justify-center"
+          >
+            <p className="text-iconic-badge-probg font-semibold flex items-center text-center">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Voluptatum, totam possimus repellendus, veritatis beatae odit
+              corporis, illo autem laboriosam cum vero nobis. Nihil consequatur
+              sequi, accusantium ex, in, aspernatur reprehenderit voluptate
+              maiores harum quam voluptatum.
             </p>
-        </motion.div>
-      </div>
-    </section>
+          </motion.div>
+        </div>
+      </section>
 
-    <section className="relative flex items-center justify-center overflow-hidden bg-white">
+      <section className="relative flex items-center justify-center overflow-hidden bg-iconic-bg">
         <div className="w-full h-full rounded-3xl m-4 md:m-6 lg:m-8 lg:my-20 p-8 md:p-12 lg:p-16 lg:py-20 flex items-center justify-between">
           {/* Left Content */}
           <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={aboutCardTextVariants}
-          // transition={{ delay: 0.1 }}
-          className="w-full md:w-1/2 flex flex-col justify-center pr-0 md:pr-8 lg:pr-12">
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={aboutCardTextVariants}
+            // transition={{ delay: 0.1 }}
+            className="w-full md:w-1/2 flex flex-col justify-center pr-0 md:pr-8 lg:pr-12"
+          >
             {/* About Badge */}
             <div className="inline-flex items-center gap-2 bg-iconic-badge rounded-full px-3 py-2 mb-6 w-fit">
               <span className="w-6 h-6 flex items-center justify-center rounded-full bg-iconic-badge-probg overflow-hidden">
-              <img src="/icons/home_user.svg" alt="User" className="w-3.5 h-3.5 object-contain" />
+                <img
+                  src="/icons/home_user.svg"
+                  alt="User"
+                  className="w-3.5 h-3.5 object-contain"
+                />
               </span>
-              <span className="text-sm text-iconic-secondary font-medium">About us</span>
+              <span className="text-sm text-iconic-secondary font-medium">
+                About us
+              </span>
             </div>
 
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-iconic-secondary mb-6 leading-tight">
               The best way to find
               <br className="hidden md:block" /> your perfect home
             </h2>
 
             {/* Description */}
-            <p className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed max-w-md">
-              Lorem ipsum dolor sit amet consectetur. Gravida elementum dolor semper felis pulvinar feugiat risus
-              adipiscing dictum. Ultricies nec elementum nisl ut. Cras diam odio sed auctor pellentesque. Sit nisl ipsum
-              id convallis tristique. Malesuada.
+            <p className="text-iconic-para text-base md:text-lg mb-8 leading-relaxed max-w-md">
+              Lorem ipsum dolor sit amet consectetur. Gravida elementum dolor
+              semper felis pulvinar feugiat risus adipiscing dictum. Ultricies
+              nec elementum nisl ut. Cras diam odio sed auctor pellentesque. Sit
+              nisl ipsum id convallis tristique. Malesuada.
             </p>
 
             {/* CTA Button */}
-            <button className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white rounded-full px-6 py-3 w-fit font-semibold hover:bg-slate-800 transition-colors">
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.9, y: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="inline-flex items-center justify-center gap-2 bg-iconic-btns hover:bg-iconic-btns text-iconic-primary rounded-full px-6 py-2 w-fit"
+            >
               Start exploring
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            </motion.button>
           </motion.div>
 
           {/* Right Image Section */}
           <div className="hidden md:flex md:w-3/5 items-center justify-center relative">
             <motion.div
-            initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={aboutCardVariants}
-            className="relative w-full">
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={aboutCardVariants}
+              className="relative w-full"
+            >
               {/* Main Property Image with Border Radius */}
               <img
                 src="/home_about-us.jpg"
@@ -298,63 +356,82 @@ export function FeaturedProperties({
               {/* Top Right Badge */}
               <div className="absolute -top-4 -right-4 bg-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
                 <div className="w-5 h-5 rounded-full bg-slate-300"></div>
-                <span className="text-sm font-semibold text-slate-800">4,821 sqft</span>
+                <span className="text-sm font-semibold text-slate-800">
+                  4,821 sqft
+                </span>
               </div>
 
               {/* Middle Left Badge */}
               <div className="absolute top-1/3 -left-4 bg-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
                 <div className="w-5 h-5 rounded-full bg-slate-300"></div>
-                <span className="text-sm font-semibold text-slate-800">3 bathrooms</span>
+                <span className="text-sm font-semibold text-slate-800">
+                  3 bathrooms
+                </span>
               </div>
 
               {/* Middle Right Badge */}
               <div className="absolute top-1/2 -right-4 bg-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
                 <div className="w-5 h-5 rounded-full bg-slate-300"></div>
-                <span className="text-sm font-semibold text-slate-800">3 bedrooms</span>
+                <span className="text-sm font-semibold text-slate-800">
+                  3 bedrooms
+                </span>
               </div>
 
               {/* Bottom Left Badge */}
               <div className="absolute -bottom-4 left-1/4 bg-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
                 <div className="w-5 h-5 rounded-full bg-slate-300"></div>
-                <span className="text-sm font-semibold text-slate-800">6 parking zones</span>
+                <span className="text-sm font-semibold text-slate-800">
+                  6 parking zones
+                </span>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* All Properties Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+      {/* Featured Properties Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-iconic-bg">
         <div className="w-full h-full rounded-3xl m-4 md:m-6 lg:m-8 px-8 md:px-12 lg:px-16 flex flex-col justify-between">
           {/* Header */}
           <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={featureCardVariants}
-          className="flex flex-col items-center text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 bg-slate-200 rounded-full px-4 py-2 mb-6">
-              <div className="w-5 h-5 rounded-full bg-slate-400"></div>
-              <span className="text-sm text-slate-700 font-medium">All properties</span>
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={featureCardVariants}
+            className="flex flex-col items-center text-center mb-12 md:mb-16"
+          >
+            <div className="inline-flex items-center gap-2 bg-iconic-badge rounded-full px-3 py-2 mb-6 w-fit">
+              <span className="w-6 h-6 flex items-center justify-center rounded-full bg-iconic-badge-probg overflow-hidden">
+                <img
+                  src="/icons/all_properties.svg"
+                  alt="Featured Properties"
+                  className="w-3.5 h-3.5 object-contain"
+                />
+              </span>
+              <span className="text-sm text-iconic-secondary font-medium">
+                Featured Properties
+              </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-iconic-secondary mb-4 leading-tight">
               Check on all properties
               <br /> we have available
             </h2>
-            <p className="text-slate-600 text-base md:text-lg max-w-2xl">
-              Lorem ipsum dolor sit amet consectetur. Sit ut gravida aenean potenti. Metus in eu vel morbi dui nunc
-              tellus. Non a massa maecenas massa.
+            <p className="text-iconic-para md:text-lg max-w-2xl">
+              Lorem ipsum dolor sit amet consectetur. Sit ut gravida aenean
+              potenti. Metus in eu vel morbi dui nunc tellus. Non a massa
+              maecenas massa.
             </p>
           </motion.div>
 
           {/* Properties Grid */}
           <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={featureCardVariants}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={featureCardVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16"
+          >
             {allProperties.map((property, index) => (
               <div key={property.id} className="flex flex-col">
                 {/* Property Card */}
@@ -369,9 +446,13 @@ export function FeaturedProperties({
                   <div className="absolute inset-0 bg-gradient-to from-black/60 via-black/20 to-transparent" />
 
                   {/* Type Badge - Top Left */}
+                  {/* Type Badge - Top Left */}
                   <div className="absolute top-4 left-4 z-10">
-                    <div className="bg-slate-900 rounded-full px-4 py-2 flex items-center gap-2">
-                      <span className="text-white text-sm font-semibold">🔍 {property.type}</span>
+                    <div className="bg-iconic-secondary rounded-full px-3 py-1 flex items-center gap-2">
+                      <img src="/icons/sale.svg" alt="" className="w-4 h-4" />
+                      <span className="text-white text-lg font-medium">
+                        {property.type}
+                      </span>
                     </div>
                   </div>
 
@@ -385,7 +466,9 @@ export function FeaturedProperties({
 
                   {/* Property Info - Bottom */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    <h3 className="text-2xl md:text-xl lg:text-2xl font-bold text-white mb-2">{property.title}</h3>
+                    <h3 className="text-2xl md:text-xl lg:text-2xl font-bold text-white mb-2">
+                      {property.title}
+                    </h3>
 
                     {/* Location */}
                     <div className="flex items-center gap-2 text-white text-sm">
@@ -427,23 +510,32 @@ export function FeaturedProperties({
 
           {/* Action Buttons */}
           <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={featureCardVariants}
-          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-            <button className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white rounded-full px-6 py-3 font-semibold hover:bg-slate-800 transition-colors">
-              Start exploring
-              <ChevronRight className="w-5 h-5" />
-            </button>
-            <button className="inline-flex items-center justify-center gap-2 text-slate-900 font-semibold hover:text-slate-700 transition-colors">
-              Browse all properties
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={featureCardVariants}
+            className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6"
+          >
+            <motion.button
+                  whileHover={{scale: 1.05, y: -2}}
+                  whileTap={{scale: 0.9, y: 1}}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className="rounded-full text-[16px] px-6 py-2 bg-iconic-btns hover:bg-iconic-btns text-iconic-primary"
+                >
+                  <Link href="#">
+                  Start Exploring
+                  </Link>
+                </motion.button>
+                <Link
+                  href="#"
+                  className="text-iconic-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all"
+                >
+                  Browse all properties
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
           </motion.div>
         </div>
       </section>
     </>
-  )
+  );
 }
-
