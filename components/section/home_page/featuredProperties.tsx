@@ -78,8 +78,8 @@ interface AllPropertiesProps {
 }
 
 export function FeaturedProperties({
-  title = "Create with Mind",
-  title2 = "Build with Heart",
+  title = "Create with Mind, Build with Heart",
+  // title2 = "Build with Heart",
   description = "Lorem ipsum dolor sit amet consectetur fermentum eget fringilla egestas a aliquam arcu arcu nunc pretium id.",
   properties = [
     {
@@ -195,7 +195,7 @@ export function FeaturedProperties({
 
   return (
     <>
-      <section className="relative h-250 flex items-center justify-center overflow-hidden">
+      <section className="relative h-220 flex items-center justify-center overflow-hidden">
         <div className="w-full h-full bg-iconic-secondary rounded-3xl m-4 md:m-6 lg:m-8 p-8 md:p-12 lg:p-16 flex flex-col justify-between overflow-y-auto">
           {/* Header */}
           <motion.div
@@ -212,12 +212,12 @@ export function FeaturedProperties({
               </span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary">
               {title}
             </h2>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary mb-4">
+            {/* <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-iconic-primary mb-4">
               {title2}
-            </h2>
+            </h2> */}
             {/* <p className="text-slate-300 text-base md:text-lg max-w-2xl">{description}</p> */}
           </motion.div>
 
